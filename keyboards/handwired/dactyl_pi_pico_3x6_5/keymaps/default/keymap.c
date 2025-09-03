@@ -41,12 +41,18 @@ enum layer_names {
 #define HRM_MIN LALT_T(KC_MINS)
 #define HRM_M RCTL_T(KC_M)
 #define HRM_DOT LT(WIN, KC_DOT)
-#define HRM_QUO RGUI_T(KC_QUOT)
+#define HRM_QUO LGUI_T(KC_QUOT)
 #define SPC_SFT LT(KANA_SHIFT, KC_SPC)
+
+#define HRM_KANA TO(KANA)
+#define HRM_SPC G(KC_SPC)
 
 #define EXT_COL LT(EXT, KC_SCLN)
 #define NAV_SLS LSFT_T(KC_SLSH)
 #define NAV_EQL LT(0, KC_EQL)
+#define CTL_SPC MT(MOD_LCTL, KC_SPC)
+#define NAV_ESC LT(NAV ,KC_ESC)
+#define CS_ENT MT(MOD_LCTL | MOD_LSFT, KC_ENT)
 
 enum custom_keycodes {
     ALT_TAB = SAFE_RANGE,
@@ -243,22 +249,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,            KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_SLSH,
         EXT_COL, HRM_A  , HRM_S  , HRM_D  , HRM_F  , KC_G   ,            KC_H   , HRM_J  , HRM_K  , HRM_L  , HRM_MIN, ALT_TAB ,
         KC_HOME, HRM_Z  , KC_X   , HRM_C  , HRM_V  , KC_B   ,            KC_N   , HRM_M  , KC_COMM, HRM_DOT, HRM_QUO, KC_END ,
-                                  KC_ENT , KC_SPC ,G(KC_SPC),            KC_BSPC, KC_ESC , KC_ENT ,
+                                   CS_ENT , CTL_SPC,G(KC_SPC),           KC_BSPC, NAV_ESC , KC_ENT ,
                                             KC_ESC ,TO(KANA),            TO(BASE),KC_GRV
     ),
 
     [KANA] = LAYOUT(  // Base layer.
-        _______ , MO(KANA_YOU),JP_KI  , JP_TE  , JP_SI  , KC_DOWN,       KC_UP  , KC_BSPC, JP_RU  , JP_SU  , JP_HE  , _______,
+        _______ , MO(KANA_YOU),JP_KI  , JP_TE  , JP_SI  , KC_DOWN,       KC_UP  , KC_BSPC, JP_RU  , JP_SU  , JP_HE  , KC_DEL,
         _______, JP_RO  , JP_KE  , JP_TO  , JP_KA  , JP_LTU ,            JP_KU  , JP_A   , JP_I   , JP_U   , KC_MINS, _______ ,
         _______, JP_HO  , JP_HI  , JP_HA  , JP_KO  , JP_SO  ,            JP_TA  , JP_NA  , JP_NN  , JP_RA  , JP_RE  , _______ ,
-                                   MO(NAV), SPC_SFT ,_______,           _______, SPC_SFT , _______,
+                                   MO(NAV), SPC_SFT ,MO(SYM),           _______, SPC_SFT , _______,
                                        MO(KANA_NUM), _______,           _______, MO(KANA_NUM)
     ),
     
     [KANA_SHIFT] = LAYOUT(
         _______ , MO(KANA_YOU), JP_NU  , JP_RI  , JP_ME  , KC_DOWN,      KC_UP  , JP_SA  , JP_YO  , JP_E   , JP_YU , _______,
         _______, JP_SE  , JP_MI  , JP_NI  , JP_MA  , JP_TI  ,            JP_YA  , JP_NO  , JP_MO  , JP_TU  , JP_HU  , _______,
-        _______, JP_HO  , JP_HI   ,JP_WO  , JP_KUTEN,JP_MU  ,            JP_O   , JP_TOUTEN,JP_NE , JP_WA  , JP_RE  , _______ ,
+        _______, JP_HO  , JP_HI   ,JP_WO  , JP_KUTEN,JP_MU  ,            JP_O   , JP_TOUTEN,JP_NE , JP_WA  , JP_RE  , _______,
                                    MO(NAV), _______, _______,            _______, _______, _______,
                                        MO(KANA_NUM), _______,            _______, MO(KANA_NUM)
     ),
@@ -275,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_SLSH, KC_9   , KC_8   , KC_7   , KC_ASTR,            XXXXXXX, KC_7   , KC_8   , KC_9 , XXXXXXX, _______,
         _______, KC_MINS, KC_3   , KC_2   , KC_1   , KC_PLUS,            XXXXXXX, KC_4   , KC_5   , KC_6 , KC_LALT, _______,
         _______, KC_X   , KC_6   , KC_5   , KC_4   , KC_PERC,            KC_0   , KC_1   , KC_2   , KC_3 , KC_LGUI, _______,
-                                   MO(NAV), _______, _______,            _______, _______, QK_LLCK,
+                                   _______, _______, _______,            _______, _______, QK_LLCK,
                                             _______, _______,            _______, _______
     ),
 
@@ -283,7 +289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_GRV , KC_LABK, KC_RABK, KC_MINS, KC_PIPE,            KC_CIRC, KC_LCBR, KC_RCBR, KC_DLR , _______, _______,
         _______, KC_EXLM, KC_ASTR, NAV_SLS, NAV_EQL, KC_AMPR,            KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_DQUO, _______,
         _______, KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,            KC_AT  , KC_COLN, KC_COMM, KC_DOT , KC_QUOT, _______,
-                                   _______, _______, KC_GRV ,            _______, _______, QK_LLCK,
+                                   _______, _______, _______ ,            _______, _______, QK_LLCK,
                                             QK_BOOT, _______,            _______, QK_BOOT
     ),
 
@@ -363,9 +369,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t caps_combo[] PROGMEM = {KC_C, KC_COMM, COMBO_END};
-const uint16_t x_c_combo[] PROGMEM = {KC_X, KC_C, COMBO_END};
+const uint16_t x_c_combo[] PROGMEM = {KC_X, HRM_C, COMBO_END};
 const uint16_t comm_dot_combo[] PROGMEM = {KC_COMM, HRM_DOT, COMBO_END};
 const uint16_t h_j_combo[] PROGMEM = {KC_H, HRM_J, COMBO_END};
+const uint16_t d_f_combo[] PROGMEM = {HRM_D, HRM_F, COMBO_END};
+
+const uint16_t ctrl_c_combo[] PROGMEM = {CTL_SPC, HRM_C, COMBO_END};
+const uint16_t ctrl_v_combo[] PROGMEM = {CTL_SPC, HRM_V, COMBO_END};
+const uint16_t ctrl_x_combo[] PROGMEM = {CTL_SPC, KC_X, COMBO_END};
+const uint16_t ctrl_z_combo[] PROGMEM = {CTL_SPC, HRM_Z, COMBO_END};
+const uint16_t ctrl_a_combo[] PROGMEM = {CTL_SPC, HRM_A, COMBO_END};
 
 const uint16_t combo_ga      [] PROGMEM = {JP_A, JP_KA, COMBO_END};
 const uint16_t combo_gi      [] PROGMEM = {JP_A, JP_KI, COMBO_END};
@@ -578,6 +591,12 @@ combo_t key_combos[] = {
     COMBO(x_c_combo, KC_BSLS),           // J and K => backslash
     COMBO(comm_dot_combo, KC_SCLN),      // , and . => ;
     COMBO(h_j_combo, OSL(FUN)),          // F and N => FUN layer
+    COMBO(ctrl_c_combo, LCTL(KC_C)),
+    COMBO(ctrl_v_combo, LCTL(KC_V)),
+    COMBO(ctrl_x_combo, LCTL(KC_X)),
+    COMBO(ctrl_z_combo, LCTL(KC_Z)),
+    COMBO(ctrl_a_combo, LCTL(KC_A)),
+    COMBO(d_f_combo, LCTL(LSFT(NAV))),
 
     COMBO(combo_ga      ,JP_GA ),
     COMBO(combo_gi      ,JP_GI ),
