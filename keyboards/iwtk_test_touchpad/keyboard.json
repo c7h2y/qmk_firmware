@@ -1,0 +1,35 @@
+{
+  "keyboard_name": "rp2040_tps43_min",
+  "manufacturer": "c7h2y",
+  "maintainer": "c7h2y",
+  "processor": "RP2040",
+  "bootloader": "rp2040",
+
+  "usb": {
+    "vid": "0xFEED",
+    "pid": "0x0000",
+    "device_version": "0.0.1"
+  },
+
+  "matrix_pins": {
+    "rows": ["GP2"],
+    "cols": ["GP3"]
+  },
+  "diode_direction": "COL2ROW",
+
+  "features": {
+    "mousekey": true,
+    "extrakey": true,
+    "pointing_device": true
+  },
+
+  "debounce": 5,
+
+  "layouts": {
+    "LAYOUT": {
+      "layout": [
+        { "label": "K00", "matrix": [0, 0], "x": 0, "y": 0, "w": 1, "h": 1 }
+      ]
+    }
+  }
+}
